@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+var config = require('../shared/config');
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,20 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+//connect to db
+const mongoose = require('mongoose');
+const connect = mongoose.connect(config.mongoUrl);
+
+connect
+.then((db) => {
+  console.log('Successfuly connected to db server');
+})
+.catch(e => {
+  console.log(e);
+  process.exit(1);
+});
+
 
 /**
  * Listen on provided port, on all network interfaces.
