@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+    form(method="post")
+        p username: 
+            input(type="text", name="username", id="username")
+        p password:
+            input(type="password" name="password" id="password")
+        input(type="submit" id="submit_signup")
+
+    script(src="javascripts/signup.js")
