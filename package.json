@@ -1,0 +1,28 @@
+{
+  "name": "forachat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "dev-server:unix": "NODE_ENV=development nodemon ./src/server/bin/www --watch ./src/server",
+    "dev-server:win": "set NODE_ENV=development&& nodemon ./src/server/bin/www --watch ./src/server"
+  },
+  "author": "blo0p",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.27",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
