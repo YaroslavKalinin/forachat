@@ -1,16 +1,11 @@
 const express = require('express');
-const usersModel = require('../models/users');
+const userModel = require('../models/user');
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-    res.status(200);
-    res.render('signup', {title: 'signup'});
-})
-
 router.post('/', (req, res, next) => {
-    usersModel
-    .add(req.body)
+    userModel
+    .create(req.body)
     .then((user) => {
         res.status(200);
         res.end();

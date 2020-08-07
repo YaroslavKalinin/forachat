@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 //connect to test db
 beforeAll(async() => {
-    const url = 'mongodb://127.0.0.1/chat_test';
+    const url = 'mongodb://127.0.0.1/test_login';
     await mongoose.connect(url, { useNewUrlParser: true });
 });
 

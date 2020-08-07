@@ -1,17 +1,16 @@
 const express = require('express');
-const usersModel = require('../models/users');
+const userModel = require('../models/user');
 const secret = require('../shared/secret.js');
 const jsonwebtoken = require('jsonwebtoken');
 const router = express.Router();
 
 
 router.post('/', (req, res, next) => {
-
-    usersModel
-    .checkUser(req.body)
+    userModel
+    .check(req.body)
     //gens token if auth success and sets it as a cookieeeee
-    .then(() => {
-            let token = jsonwebtoken.sign({user: req.body.username}, secret, { algorithm: "HS256"});
+    .then((user_id) => {
+            let token = jsonwebtoken.sign({id: user_id}, secret, { algorithm: "HS256"});
             res.status(200);
             res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
             res.end();
