@@ -5,25 +5,44 @@
   "main": "index.js",
   "scripts": {
     "test-server:unix": "NODE_ENV=test jest --verbose --detectOpenHandles ./src/server",
-    "dev-server:unix": "NODE_ENV=development nodemon ./src/server/bin/www --watch ./src/server --ignore *.test.js",
-    "dev-server:win": "set NODE_ENV=development&& nodemon ./src/server/bin/www --watch ./src/server --ignore *.test.js"
+    "dev-client:unix": "NODE_ENV=development webpack-dev-server --host 0.0.0.0 --open",
+    "build-client:unix": "NODE_ENV=development webpack",
+    "deploy-client:unix": "serve -s ./dist/client/ -l 19006",
+    "dev-server:unix": "NODE_ENV=development nodemon ./src/server/bin/www --watch ./src/server --ignore *.test.js"
   },
   "author": "blo0p",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.27",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11",
-    "socket.io": "^2.3.0"
+    "mongoose": "^5.9.7",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "socket.io": "^2.3.0",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.0.4",
     "jest": "^26.0.1",
-    "supertest": "^4.0.2"
+    "speed-measure-webpack-plugin": "^1.3.3",
+    "style-loader": "^1.1.3",
+    "supertest": "^4.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }

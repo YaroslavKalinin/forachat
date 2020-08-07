@@ -12,7 +12,7 @@ router.post('/', (req, res, next) => {
     .then((user_id) => {
             let token = jsonwebtoken.sign({id: user_id}, secret, { algorithm: "HS256"});
             res.status(200);
-            res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
+            res.header('Set-Cookie', `token=${token}; HttpOnly; SameSite=None`);
             res.end();
     },(e =>  next({message: e.message, status: 401})))
     .catch((e) => {
