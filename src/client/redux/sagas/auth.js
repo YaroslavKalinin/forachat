@@ -17,10 +17,9 @@ export function* authUser(action) {
                     username: action.user,
                     password: action.password
                 })
-            
         });
         if(res.status === 200){
-            yield put(ActionCreators.authSuccess(action.user));
+            yield put(ActionCreators.authSuccess());
         }
         else {
             const body = yield res.json();
@@ -40,3 +39,4 @@ export function* authLogout() {
       credentials: 'include',
     });
 }
+

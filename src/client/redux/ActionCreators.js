@@ -40,3 +40,32 @@ export function authLogoutEnd(){
         type: Actions.AuthLogoutEnd
     }
 }
+
+export function signup(user, password){
+    return {
+        type: Actions.Signup,
+        username: user,
+        password: password
+    }
+}
+
+export function signupStart(){
+    return {
+        type: Actions.SignupStart
+    }
+}
+
+export function signupEnd(){
+    return {
+        type: Actions.SignupEnd
+    }
+}
+
+export function signupFailed(err){
+    return {
+        type: Actions.SignupFailed,
+        message: err
+    }
+}
+
+/* user info */

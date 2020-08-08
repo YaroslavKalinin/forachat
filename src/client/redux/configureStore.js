@@ -1,13 +1,15 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux'; 
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/sagas';
-import user from './reducers/user';
+import auth from './reducers/auth';
+import signup from './reducers/signup';
 
 
 const sagaMiddleware = createSagaMiddleware();
 const configureStore = createStore(
     combineReducers({
-        user: user
+        auth: auth,
+        signup: signup
     }),
     {},
     compose(

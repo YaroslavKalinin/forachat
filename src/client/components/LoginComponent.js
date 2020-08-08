@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { authUser } from '../redux/ActionCreators';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user.user,
-        isLoading: state.user.isLoading,
-        error: state.user.error
+        isLoggedIn: state.auth.isLoggedIn,
+        isLoading: state.auth.isLoading,
+        error: state.auth.error
     }
 }
 
@@ -20,10 +20,16 @@ const mapDispatchToProps = (dispatch) => {
 function Login(props) { 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [validation, setValidation] = useState('');
 
     function onClick(e){
         e.preventDefault();
-        props.authUser(username, password);
+        if(!(/^[a-z0-9_]{3,16}$/i.test(username) && /^[a-z0-9_]{3,16}$/i.test(password))){
+            setValidation('Password and username should be 16 length character string');
+        } else {
+            setValidation('');
+            props.authUser(username, password);
+        }
     }
 
     //see that super trooper spinner
@@ -35,7 +41,7 @@ function Login(props) {
         )
     }
     //if you are logged in - redirect to room
-    if(props.user){
+    if(props.isLoggedIn){
         return <Redirect to="/"/>
     }
 
@@ -56,9 +62,10 @@ function Login(props) {
             </div>
             <div className="form__line">
                 <input onClick={onClick} value="login" type="submit" name="sumbit" className="form__submit"/>
-                {/*add link and warnings*/}
+                <Link to="/signup">signup</Link>
             </div>
-            <div>{props.error}</div>
+            <div className="form__error">{ validation }</div>
+            <div className="form__error">{props.error}</div>
         </form>
     )
 }

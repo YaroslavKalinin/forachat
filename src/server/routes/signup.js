@@ -9,7 +9,7 @@ router.post('/', (req, res, next) => {
     .then((user) => {
         res.status(200);
         res.end();
-    }, e => next({message: e._message, status: 409}))
+    }, e => next({message: "Username already registered", status: 409}))
     .catch((e) => {
         //log error... log(e)
         next({message: "Sorry, we have troubles on our server :(", status: 500});

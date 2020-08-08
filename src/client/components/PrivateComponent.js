@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user.user
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 
@@ -24,7 +24,7 @@ function Private(props) {
     }
 
     //if not authorized
-    if(!props.user){
+    if(!props.isLoggedIn){
         return <Redirect to="/login"/>
     }
 
