@@ -6,29 +6,45 @@ const userModel = require('../models/user');
 
 //auth token after each connection
 io.use(async (socket, next) => {
-    let token = socket.handshake.headers.cookie.match(/token=([A-Za-z0-9\-\._~\+\/]+)/)[1];
-    const user_id = jsonwebtoken.verify(token, secret).user_id;
-    await userModel
-    .findById(user_id)
-    .then((user) => {
-        if(user){
-            socket.user_id = user_id;
-            next();
+    console.log()
+    try {
+        let token = socket.handshake.headers.cookie.match(/token=([A-Za-z0-9\-\._~\+\/]+)/);
+        if(!token){
+            throw {message: 'auth failed'};
         }
-        else {
-            next('Authorization err');
-        }
-    })
-    .catch((e) => {
-        //log error... log(e)
-        next({message: "Sorry, we have troubles on our server :(", status: 500});
-    })
+        token = token[1];
+        const user_id = jsonwebtoken.verify(token, secret).id;
+        await userModel
+        .findById(user_id)
+        .then((user) => {
+            if(user){
+                socket.user_id = user_id;
+                next();
+            }
+            else {
+                throw {message: 'auth failed'};
+            }
+        })
+    }
+    catch(e) {
+        next(e);
+    }
 });
 
 
 io.on('connection', (socket) => {
-    socket.on('sig', () => {
-       console.log(`Hello ${socket.user}`); 
+    socket.on('gimme.user', () => {
+        userModel
+        .findById(socket.user_id)
+        .then((user) => {
+            if(user){
+                socket.emit('take.user', { id: user._id, name: user.username });
+            }
+            else {
+                throw {message: 'gimme.user failed'};
+            }
+        })
+       console.log(`Hello ${socket.user_id}`); 
     });
 });
 

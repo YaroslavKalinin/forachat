@@ -41,6 +41,7 @@ export function authLogoutEnd(){
     }
 }
 
+/* signup */
 export function signup(user, password){
     return {
         type: Actions.Signup,
@@ -68,4 +69,66 @@ export function signupFailed(err){
     }
 }
 
+/* socket */
+export function socketConnect(){
+    return {
+        type: Actions.SocketConnect,
+    }
+}
+
+export function socketStart(){
+    return {
+        type: Actions.SocketStart
+    }
+}
+
+export function socketEnd(){
+    return {
+        type: Actions.SocketEnd
+    }
+}
+
+export function socketFailed(err){
+    return {
+        type: Actions.SocketFailed,
+        message: err
+    }
+}
+
 /* user info */
+export function userLoad(){
+    return {
+        type: Actions.UserLoad
+    }
+}
+export function userLoadStart(){
+    return {
+        type: Actions.UserLoadStart
+    }
+}
+export function userLoadEnd(id, name){
+    return {
+        type: Actions.UserLoadEnd,
+        id: id,
+        name: name
+    }
+}
+export function userLoadFailed(message){
+    return {
+        type: Actions.UserLoadFailed,
+        error: message 
+    }
+}
+
+/* participants */
+export function participantsLoad(roomId){
+    return {
+        type: Actions.ParticipantsLoad,
+        id: roomId
+    }
+}
+export function participantsLoadStart(roomId){
+    return {
+        type: Actions.ParticipantsLoadStart
+    }
+}

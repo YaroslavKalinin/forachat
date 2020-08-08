@@ -12,7 +12,7 @@ var logoutRouter = require('./routes/logout');
 var app = express();
 
 //enable cors for react server
-app.use(cors({credentials: true, origin: 'http://0.0.0.0:19006'}));
+app.use(cors({credentials: true, origin: ['http://0.0.0.0:19006', 'http://localhost:19006']}));
 
 app.use(logger('dev'));
 app.use(express.json());

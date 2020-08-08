@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './LoginComponent';
 import Signup from './SignupComponent';
-import Private from './PrivateComponent';
+import Room from './RoomComponent';
 import Error from './ErrorComponent';
 import {
     Switch,
@@ -13,9 +13,7 @@ import {
 function App() {
     return(
         <Switch>
-            <Route exact path="/">
-                <Private/>
-            </Route>
+            <Route exact path={["/", "/:id"]} children={<Room/>}/>
             <Route path="/login">
                 <Login/>
             </Route>
