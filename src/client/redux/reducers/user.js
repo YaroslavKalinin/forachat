@@ -1,6 +1,6 @@
 import * as Actions from '../ActionTypes';
 
-export default function auth(state = {
+export default function user(state = {
     id: '',
     name: '',
     error: '',

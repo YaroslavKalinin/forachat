@@ -5,6 +5,7 @@ import auth from './reducers/auth';
 import socket from './reducers/socket';
 import user from './reducers/user';
 import signup from './reducers/signup';
+import participants from './reducers/participants';
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -13,7 +14,8 @@ const configureStore = createStore(
         auth: auth,
         user: user,
         socket: socket,
-        signup: signup
+        signup: signup,
+        participants: participants
     }),
     {},
     compose(

@@ -30,3 +30,5 @@ export const UserLoadFailed = 'USER_LOAD_FAILED';
 /* participants */
 export const ParticipantsLoad = 'PARTICIPANTS_LOAD';
 export const ParticipantsLoadStart = 'PARTICIPANTS_LOAD_START';
+export const ParticipantsLoadEnd = 'PARTICIPANTS_LOAD_END';
+export const ParticipantsLoadFailed = 'PARTICIPANTS_LOAD_FAILED';

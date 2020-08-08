@@ -1,4 +1,4 @@
-var io = require('socket.io')();
+const io = require('socket.io')();
 const jsonwebtoken = require('jsonwebtoken');
 const secret = require('../shared/secret');
 const userModel = require('../models/user');
@@ -6,19 +6,23 @@ const userModel = require('../models/user');
 
 //auth token after each connection
 io.use(async (socket, next) => {
-    console.log()
+    socket.handshake.reload();
     try {
+        console.log(socket.handshake.headers.cookie);
         let token = socket.handshake.headers.cookie.match(/token=([A-Za-z0-9\-\._~\+\/]+)/);
         if(!token){
             throw {message: 'auth failed'};
         }
         token = token[1];
         const user_id = jsonwebtoken.verify(token, secret).id;
+        //ensure that user exists in your db
         await userModel
         .findById(user_id)
         .then((user) => {
             if(user){
-                socket.user_id = user_id;
+                //make some info bearers
+                socket.user_id = user._id;
+                socket.username = user.username;
                 next();
             }
             else {
@@ -31,20 +35,13 @@ io.use(async (socket, next) => {
     }
 });
 
-
 io.on('connection', (socket) => {
+    //describe protocol
     socket.on('gimme.user', () => {
-        userModel
-        .findById(socket.user_id)
-        .then((user) => {
-            if(user){
-                socket.emit('take.user', { id: user._id, name: user.username });
-            }
-            else {
-                throw {message: 'gimme.user failed'};
-            }
-        })
-       console.log(`Hello ${socket.user_id}`); 
+       socket.emit('take.user', { id: socket.user_id, name: socket.username });
+    });
+    socket.on('gimme.participants', (roomId) => {
+        console.log(roomId);
     });
 });
 

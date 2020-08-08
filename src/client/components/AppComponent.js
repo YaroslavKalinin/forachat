@@ -13,13 +13,13 @@ import {
 function App() {
     return(
         <Switch>
-            <Route exact path={["/", "/:id"]} children={<Room/>}/>
             <Route path="/login">
                 <Login/>
             </Route>
             <Route path="/signup">
                 <Signup/>
             </Route>
+            <Route exact path={["/", "/:id"]} children={<Room/>}/>
             <Route>
                 <Error message="404, page not found..."/>
             </Route>
