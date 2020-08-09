@@ -96,7 +96,10 @@ function Room(props) {
                 })}
             </aside>
             <div className="chat">
-                <button alt="logout"  className="btn btn--secondary" onClick={ onLogout }>logout</button>
+                <div className="room__header">
+                    <h1 className="room__title">{id}</h1>
+                    <button alt="logout"  className="btn btn--secondary" onClick={ onLogout }>logout</button>
+                </div>
                 <div className="messages">
                     {props.messages.map((message, index) => {
                         return <Message username={props.username} message={message} key={index}/>

@@ -16,6 +16,11 @@
     }
 }
 
+.messages__message {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .messages__message--right {
     align-self: flex-end;
 }

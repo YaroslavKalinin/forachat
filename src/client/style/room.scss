@@ -2,11 +2,28 @@
 
 .room {
     display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+}
+.room__header {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+.room__title {
+    color: #fff;
+    margin-right: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 320px;
+    word-break: break-all;
 }
 .room__sender {
     display: flex;
+    align-items: baseline;
 }
 .room__sender-input {
     width: 80%;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
