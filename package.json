@@ -6,7 +6,7 @@
   "scripts": {
     "test-server:unix": "NODE_ENV=test jest --verbose --detectOpenHandles ./src/server",
     "dev-client:unix": "NODE_ENV=development webpack-dev-server --host 0.0.0.0 --open",
-    "build-client:unix": "NODE_ENV=development webpack",
+    "build-client:unix": "NODE_ENV=production webpack",
     "deploy-client:unix": "serve -s ./dist/client/ -l 19006",
     "dev-server:unix": "NODE_ENV=development nodemon ./src/server/bin/www --watch ./src/server --ignore *.test.js"
   },

@@ -65,11 +65,16 @@ io.on('connection', (socket) => {
             socket.emit('take.participants', participants);
             //notify that socket has joined
             socket.to(socket.roomId).emit('participant.join', ({id: socket.user_id, username: socket.username}));
+            socket.to(socket.roomId).emit('take.message', { name: socket.username, type: "notification", content: "has joined the room"})
         }
     });
+    socket.on('send.message', (message) => {
+        io.to(socket.roomId).emit('take.message', { name: socket.username, type: "message", content: message });
+    })
     socket.on('disconnect', () => {
         //notify that socces has disconnected
         io.to(socket.roomId).emit('participant.leave', socket.user_id);
+        socket.to(socket.roomId).emit('take.message', { name: socket.username, type: "notification", content: "has left the room"})
     })
 });
 

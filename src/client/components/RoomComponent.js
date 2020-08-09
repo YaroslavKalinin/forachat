@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { socketConnect, authLogoutStart, userLoad, participantsLoad } from '../redux/ActionCreators';
+import { socketConnect, authLogoutStart, userLoad, participantsLoad, sendMessage } from '../redux/ActionCreators';
 import { connect } from 'react-redux';
 
 import Loading from './LoadingComponent';
+import Message from './MessageComponent';
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +12,9 @@ const mapStateToProps = (state) => {
         socketConnecting: state.socket.isConnecting,
         userLoading: state.user.isLoading,
         userId: state.user.id,
+        username: state.user.name,
         participants: state.participants.participants,
+        messages: state.messages.messages
     }
 }
 
@@ -20,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
         logout: () => dispatch(authLogoutStart()),
         socketConnect: () => dispatch(socketConnect()),
         userLoad: () => dispatch(userLoad()),
-        participantsLoad: (roomId) => dispatch(participantsLoad(roomId))
+        participantsLoad: (roomId) => dispatch(participantsLoad(roomId)),
+        sendMessage: (message) => dispatch(sendMessage(message))
     }
 }
 
@@ -28,14 +32,25 @@ const mapDispatchToProps = (dispatch) => {
 function Room(props) { 
 
     let { id } = useParams();
+
+    const [message, setMessage] = useState('');
+
     useEffect(() => {
-        //props.socketConnect();
         //load user once mounted
         props.userLoad();
     }, []);
 
+    //handle submit
+    function onSubmit(e) {
+        e.preventDefault();
+        if(message){
+            //send message
+            props.sendMessage(message);
+            setMessage('');
+        }
+    }
     //handle logout button
-    function onClick(e) {
+    function onLogout(e) {
         props.logout();
     }
 
@@ -72,12 +87,22 @@ function Room(props) {
     return (
         <div>
             <div className="room">
-                <aside className="room__participants">
+                <aside className="participants">
                     {props.participants.map(participant => {
-                       return (<div className="room__participant" key={participant.id}>{participant.username}</div>) 
+                       return (<div className="participants__participant" key={participant.id}>{participant.username}</div>) 
                     })}
                 </aside>
-                <button alt="logout" onClick={ onClick }>logout</button>
+                <div className="messages">
+                    {props.messages.map((message, index) => {
+                        return <Message username={props.username} message={message} key={index}/>
+                    })}
+                </div>
+                {/*yp, strange name*/}
+                <form className="sender">
+                    <input type="text"  value={message} onChange={(e) => setMessage(e.target.value)} name="input" className="sebder__input"/>
+                    <input type="submit" onClick={ onSubmit } name="submit" className="sender__submit" value="submit"/>
+                </form>
+                <button alt="logout" onClick={ onLogout }>logout</button>
             </div>
         </div>
     )

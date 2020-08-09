@@ -1,5 +1,6 @@
 import { put } from 'redux-saga/effects';
 import * as ActionCreators from '../ActionCreators';
+import socket from '../../socket/setupSocket';
 
 export function* authUser(action) {
     try {
@@ -36,6 +37,8 @@ export function* authUser(action) {
 
 export function* authLogout() {
     yield put(ActionCreators.authLogoutEnd());
+    //disconnect token
+    socket.disconnect();
     //clear token
     yield fetch('http://localhost:3000/logout', {
       method: 'POST',

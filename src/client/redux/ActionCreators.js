@@ -167,3 +167,18 @@ export function participantRemove(id){
         id: id
     }
 }
+
+/* messages */
+export function addMessage(message){
+    return {
+        type: Actions.AddMessage,
+        message: message
+    }
+}
+
+export function sendMessage(message){
+    return {
+        type: Actions.SendMessage,
+        message: message
+    }
+}

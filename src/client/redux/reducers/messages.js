@@ -5,8 +5,7 @@ export default function messages(state = {
 } , action) {
     switch(action.type){
         case Actions.AddMessage:
-            console.log('add message');
-            return state;
+            return { ...state, messages: [...state.messages, action.message] };
         default:
             return state;
     }

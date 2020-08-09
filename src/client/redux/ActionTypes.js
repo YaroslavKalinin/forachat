@@ -39,3 +39,4 @@ export const ParticipantRemove = 'PARTICIPANT_REMOVE';
 
 /* messages */
 export const AddMessage = 'ADD_MESSAGE';
+export const SendMessage = 'SEND_MESSAGE';

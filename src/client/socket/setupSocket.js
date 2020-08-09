@@ -22,15 +22,18 @@ socket.on('error', (message) => {
     console.log(message);
 })
 
+//user listeners
 socket.on('take.user', (user) => {
     store.dispatch(ActionCreators.userLoadEnd(user.id, user.name));
     //socket.emit('gimme.participant', )
 })
 
+//test listener
 socket.on('ping', () => {
     console.log('pong');
 })
 
+//participants listeners
 socket.on('take.participants', (participants) => {
     store.dispatch(ActionCreators.participantsLoadEnd(participants));
 });
@@ -43,5 +46,9 @@ socket.on('participant.leave', (id) => {
     store.dispatch(ActionCreators.participantLeft(id));
 });
 
+//message listeners
+socket.on('take.message', (message) => {
+    store.dispatch(ActionCreators.addMessage(message));
+});
 
 export default socket;

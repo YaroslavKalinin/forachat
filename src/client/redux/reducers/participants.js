@@ -14,7 +14,6 @@ export default function participants(state = {
         case Actions.ParticipantsLoadFailed:
             return { ...state, participants: [], Loading: false, error : action.message};
         case Actions.ParticipantAdd:
-            console.log(action.participant);
             return {...state, participants: [...state.participants, action.participant]};
         case Actions.ParticipantRemove:
             const new_participants = state.participants.filter(participant => {

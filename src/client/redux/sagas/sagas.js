@@ -3,7 +3,12 @@ import * as Actions from '../ActionTypes';
 
 import { authUser, authLogout } from './auth';
 import { signup } from './signup';
-import { userLoad, participantsLoad, participantJoined, participantLeft } from './socket';
+import { userLoad,
+        participantsLoad,
+        participantJoined,
+        participantLeft,
+        sendMessage
+       } from './socket';
 
 const delay = (ms) => new Promise(res => setInterval(res, ms));
 
@@ -18,6 +23,7 @@ function* watchSocketSaga() {
     yield takeLatest(Actions.ParticipantsLoad, participantsLoad);
     yield takeEvery(Actions.ParticipantJoined, participantJoined);
     yield takeEvery(Actions.ParticipantLeft, participantLeft);
+    yield takeEvery(Actions.SendMessage, sendMessage);
 }
 
 export default function* rootSaga() {
