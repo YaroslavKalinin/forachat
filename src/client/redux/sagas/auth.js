@@ -1,8 +1,6 @@
 import { put } from 'redux-saga/effects';
 import * as ActionCreators from '../ActionCreators';
 
-const delay = (ms) => new Promise(res => setTimeout(res, ms));
-
 export function* authUser(action) {
     try {
         //start authorization
@@ -21,7 +19,8 @@ export function* authUser(action) {
                 })
         });
         if(res.status === 200){
-            yield delay(5000);
+            //refresh page with jwt token set up
+            window.location.reload(true);
             console.log('from auth');
             yield put(ActionCreators.authSuccess());
         }

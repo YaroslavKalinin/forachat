@@ -32,3 +32,10 @@ export const ParticipantsLoad = 'PARTICIPANTS_LOAD';
 export const ParticipantsLoadStart = 'PARTICIPANTS_LOAD_START';
 export const ParticipantsLoadEnd = 'PARTICIPANTS_LOAD_END';
 export const ParticipantsLoadFailed = 'PARTICIPANTS_LOAD_FAILED';
+export const ParticipantJoined = 'PARTICIPANT_JOINED';
+export const ParticipantAdd = 'PARTICIPANT_ADD';
+export const ParticipantLeft = 'PARTICIPANT_LEFT';
+export const ParticipantRemove = 'PARTICIPANT_REMOVE';
+
+/* messages */
+export const AddMessage = 'ADD_MESSAGE';

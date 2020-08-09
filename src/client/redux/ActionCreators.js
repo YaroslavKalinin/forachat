@@ -127,8 +127,43 @@ export function participantsLoad(roomId){
         id: roomId
     }
 }
-export function participantsLoadStart(roomId){
+export function participantsLoadStart(){
     return {
         type: Actions.ParticipantsLoadStart
+    }
+}
+
+export function participantsLoadEnd(participants){
+    return {
+        type: Actions.ParticipantsLoadEnd,
+        participants: participants
+    }
+}
+
+export function participantJoined(participant){
+    return {
+        type: Actions.ParticipantJoined,
+        participant: participant
+    }
+}
+
+export function participantLeft(id){
+    return {
+        type: Actions.ParticipantLeft,
+        id: id
+    }
+}
+
+export function participantAdd(participant){
+    return {
+        type: Actions.ParticipantAdd,
+        participant: participant
+    }
+}
+
+export function participantRemove(id){
+    return {
+        type: Actions.ParticipantRemove,
+        id: id
     }
 }

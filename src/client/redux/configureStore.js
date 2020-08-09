@@ -5,6 +5,7 @@ import auth from './reducers/auth';
 import socket from './reducers/socket';
 import user from './reducers/user';
 import signup from './reducers/signup';
+import messages from './reducers/messages';
 import participants from './reducers/participants';
 
 
@@ -15,7 +16,8 @@ const configureStore = createStore(
         user: user,
         socket: socket,
         signup: signup,
-        participants: participants
+        participants: participants,
+        messages: messages
     }),
     {},
     compose(
