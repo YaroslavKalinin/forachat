@@ -4,7 +4,7 @@ import url from '../shared/url';
 import store from '../redux/configureStore';
 import * as ActionCreators from '../redux/ActionCreators';
 
-let socket = io(url);
+let socket = io.connect(url);
 
 //data flow
 // - connect

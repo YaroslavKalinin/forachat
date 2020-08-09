@@ -34,11 +34,14 @@ function Room(props) {
     let { id } = useParams();
 
     const [message, setMessage] = useState('');
+    const messagesEndRef = useRef(null)
 
+   //load user once mounted
     useEffect(() => {
-        //load user once mounted
         props.userLoad();
     }, []);
+
+
 
     //handle submit
     function onSubmit(e) {
@@ -85,24 +88,26 @@ function Room(props) {
     }
 
     return (
-        <div>
-            <div className="room">
-                <aside className="participants">
-                    {props.participants.map(participant => {
-                       return (<div className="participants__participant" key={participant.id}>{participant.username}</div>) 
-                    })}
-                </aside>
+        <div className="room">
+            <aside className="participants">
+                <h1 className="participants__header">Participants</h1>
+                {props.participants.map(participant => {
+                   return (<div className="participants__participant" key={participant.id}>{participant.username}</div>) 
+                })}
+            </aside>
+            <div className="chat">
+                <button alt="logout"  className="btn btn--secondary" onClick={ onLogout }>logout</button>
                 <div className="messages">
                     {props.messages.map((message, index) => {
                         return <Message username={props.username} message={message} key={index}/>
-                    })}
+                    }).reverse()}
+                    <div ref={messagesEndRef} />
                 </div>
                 {/*yp, strange name*/}
-                <form className="sender">
-                    <input type="text"  value={message} onChange={(e) => setMessage(e.target.value)} name="input" className="sebder__input"/>
-                    <input type="submit" onClick={ onSubmit } name="submit" className="sender__submit" value="submit"/>
+                <form className="room__sender">
+                    <input type="text"  value={message} onChange={(e) => setMessage(e.target.value)} name="input" className="room__sender-input"/>
+                    <input type="submit" onClick={ onSubmit } name="submit" className="room__sender-submit btn btn--secondary" value="submit"/>
                 </form>
-                <button alt="logout" onClick={ onLogout }>logout</button>
             </div>
         </div>
     )

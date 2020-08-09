@@ -1,13 +1,14 @@
 import { put } from 'redux-saga/effects';
 import * as ActionCreators from '../ActionCreators';
 import socket from '../../socket/setupSocket';
+import url from '../../shared/url';
 
 export function* authUser(action) {
     try {
         //start authorization
         yield put(ActionCreators.authStart());
         //get jwt token as httponly cookie
-        const res = yield fetch('http://localhost:3000/login', {
+        const res = yield fetch(url+'login', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -40,7 +41,7 @@ export function* authLogout() {
     //disconnect token
     socket.disconnect();
     //clear token
-    yield fetch('http://localhost:3000/logout', {
+    yield fetch(url + 'logout', {
       method: 'POST',
       credentials: 'include',
     });

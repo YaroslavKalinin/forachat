@@ -1,0 +1,36 @@
+
+
+.form {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: var(--secondary); 
+}
+.form__header {
+    margin-bottom: 30px;
+}
+.form__line {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.form__label {
+    display: inline-block;
+    width: 100px;
+}
+.form__input {
+    border: 3px solid var(--secondary-dark);
+    padding: 2px;
+    outline: none;
+    @include xs {
+        width: 150px;
+    }
+    @include sm {
+        width: 210px;
+    }
+}
+.form__submit {
+    margin-right: 20px;
+}
+.form__error {
+    color: var(--error);
+}

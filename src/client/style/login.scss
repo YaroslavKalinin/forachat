@@ -1,0 +1,12 @@
+
+
+.login {
+    margin: auto;
+    margin-top: 50px;
+    @include xs {
+        width: 200px;
+    }
+    @include sm {
+        width: 330px;
+    }
+}

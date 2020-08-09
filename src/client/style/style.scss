@@ -1,0 +1,31 @@
+//define globals
+:root {
+  --primary: #000;
+  --secondary: #fff;
+  --secondary-dark: #c0c0c0;
+  --error: red;
+}
+
+//import fonts
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+//layout setup
+body, html {
+    font-family: 'VT323', monospace;
+    background-color: var(--primary);
+    box-sizing: border-box;
+}
+//breakpoints setup
+@import 'breakpoints.scss';
+
+@import 'grid.scss';
+
+@import 'form.scss';
+@import 'button.scss';
+@import 'login.scss';
+@import 'signup.scss';
+@import 'room.scss';
+@import 'chat.scss';
+@import 'participants.scss';
+@import 'messages.scss';
+

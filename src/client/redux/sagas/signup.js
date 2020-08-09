@@ -1,12 +1,13 @@
 import { put } from 'redux-saga/effects';
 import * as ActionCreators from '../ActionCreators';
+import url from '../../shared/url';
 
 export function* signup(action) {
     try {
         //start signup
         yield put(ActionCreators.signupStart());
         //try to register user
-        const res = yield fetch('http://localhost:3000/signup', {
+        const res = yield fetch(url + 'signup', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'

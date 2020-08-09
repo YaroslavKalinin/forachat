@@ -46,8 +46,8 @@ function Login(props) {
     }
 
     return (
-        <form className="form">
-            <h1 className="form__header main-header">Login</h1>
+        <form className="form login">
+            <h1 className="form__header main-header">Login ForaChat</h1>
             <div className="form__line">
                 <label htmlFor="username" className="form__label">
                     Username:
@@ -61,8 +61,8 @@ function Login(props) {
                 <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" name="password" className="form__input"/>
             </div>
             <div className="form__line">
-                <input onClick={onClick} value="login" type="submit" name="sumbit" className="form__submit"/>
-                <Link to="/signup">signup</Link>
+                <input onClick={onClick} value="login" type="submit" name="sumbit" className="form__submit btn"/>
+                <Link to="/signup" className="link">signup</Link>
             </div>
             <div className="form__error">{ validation }</div>
             <div className="form__error">{props.error}</div>

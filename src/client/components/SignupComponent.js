@@ -3,8 +3,10 @@ import { signup } from '../redux/ActionCreators';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 const mapStateToProps = (state) => {
     return {
+        isLoggedIn: state.auth.isLoggedIn,
         isLoading: state.signup.isLoading,
         error: state.signup.error,
         isAdded: state.signup.isAdded
@@ -18,6 +20,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 function Signup(props) {
+    //if you are logged in - redirect to room
+    if(props.isLoggedIn){
+        return <Redirect to="/"/>
+    }
 
     if(props.isLoading){
         return (
@@ -47,7 +53,7 @@ function Signup(props) {
     }
 
     return (
-        <form className="form">
+        <form className="form signup">
             <h1 className="form__header main-header">Signup</h1>
             <div className="form__line">
                 <label htmlFor="username" className="form__label">
@@ -68,7 +74,7 @@ function Signup(props) {
                 <input value={passwordRepeat} onChange={(e) => setPasswordRepeat(e.target.value)} type="password" name="repeat-password" className="form__input"/>
             </div>
             <div className="form__line">
-                <input value="signup" onClick={ onClick } type="submit" name="sumbit" className="form__submit"/>
+                <input value="signup" onClick={ onClick } type="submit" name="sumbit" className="form__submit btn"/>
                 <Link to="/login">login</Link>
             </div>
             <div className="form__error">{ validation }</div>

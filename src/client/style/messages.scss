@@ -1,0 +1,21 @@
+
+
+.messages {
+    background-color: var(--secondary);
+    overflow: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 15px;
+    @include xs {
+        height: 400px;
+    }
+    @include sm {
+        height: 500px;
+    }
+}
+
+.messages__message--right {
+    align-self: flex-end;
+}

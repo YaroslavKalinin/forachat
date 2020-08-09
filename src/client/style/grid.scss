@@ -1,0 +1,20 @@
+
+
+.container {
+    margin: auto;
+    @include xs {
+        width: 90%;
+    }
+    @include sm {
+        width: 600px;
+    }
+    @include md {
+        width: 900px;
+    }
+    @include lg {
+        width: 1300px;
+    }
+    @include xl {
+        width: 1600px;
+    }
+}
