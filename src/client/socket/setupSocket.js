@@ -1,4 +1,3 @@
-//yp, looks ugly
 import io from 'socket.io-client';
 import url from '../shared/url';
 import store from '../redux/configureStore';
@@ -6,11 +5,7 @@ import * as ActionCreators from '../redux/ActionCreators';
 
 let socket = io.connect(url);
 
-//data flow
-// - connect
-// - take.user
-// - take.participants
-
+//basic listeners
 socket.on('connect', () => {
     console.log('success');
 })
@@ -34,8 +29,8 @@ socket.on('ping', () => {
 })
 
 //participants listeners
-socket.on('take.participants', (participants) => {
-    store.dispatch(ActionCreators.participantsLoadEnd(participants));
+socket.on('take.participants', async (participants) => {
+    await store.dispatch(ActionCreators.participantsLoadEnd(participants));
 });
 
 socket.on('participant.join', (participant) => {

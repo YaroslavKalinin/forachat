@@ -1,10 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
-import { socketConnect, authLogoutStart, userLoad, participantsLoad, sendMessage } from '../redux/ActionCreators';
+import { socketConnect,
+        authLogoutStart,
+        userLoad,
+        participantsLoad,
+        sendMessage } from '../redux/ActionCreators';
 import { connect } from 'react-redux';
 
 import Loading from './LoadingComponent';
 import Message from './MessageComponent';
+import Video from './VideoComponent';
 
 const mapStateToProps = (state) => {
     return {
@@ -92,13 +97,21 @@ function Room(props) {
             <aside className="participants">
                 <h1 className="participants__header">Participants</h1>
                 {props.participants.map(participant => {
-                   return (<div className="participants__participant" key={participant.id}>{participant.username}</div>) 
+                   return (<div
+                    //if participant is broadcaster - colorize to green
+                    className={ participant.id === id ?
+                        "participants__participant participants__participant--broadcaster" :
+                        "participants__participant"}
+                    key={participant.id}>{participant.username}</div>) 
                 })}
             </aside>
             <div className="chat">
                 <div className="room__header">
                     <h1 className="room__title">{id}</h1>
                     <button alt="logout"  className="btn btn--secondary" onClick={ onLogout }>logout</button>
+                </div>
+                <div className="videos">
+                    <Video userId={props.userId} roomId={id}/>;
                 </div>
                 <div className="messages">
                     {props.messages.map((message, index) => {

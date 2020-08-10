@@ -9,10 +9,10 @@
     flex-direction: column-reverse;
     padding: 15px;
     @include xs {
-        height: 400px;
+        height: 250px;
     }
     @include sm {
-        height: 500px;
+        height: 350px;
     }
 }
 

@@ -68,9 +68,18 @@ io.on('connection', (socket) => {
             socket.to(socket.roomId).emit('take.message', { name: socket.username, type: "notification", content: "has joined the room"})
         }
     });
+    //recieve message from user
     socket.on('send.message', (message) => {
         io.to(socket.roomId).emit('take.message', { name: socket.username, type: "message", content: message });
     })
+    //peers listeners
+    socket.on('streamer.calling', (data) => {
+        socket.to(socket.roomId).emit('hey', data);
+    })
+    socket.on('watcher.accept', (data) => {
+        socket.to(socket.roomId).emit('accepted', data);
+    })
+    //disconnect user
     socket.on('disconnect', () => {
         //notify that socces has disconnected
         io.to(socket.roomId).emit('participant.leave', socket.user_id);

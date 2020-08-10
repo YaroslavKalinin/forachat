@@ -1,0 +1,16 @@
+
+
+.videos {
+    display: flex;
+    align-items: baseline;
+    overflow: auto;
+}
+
+.videos__video {
+    height: 100px;
+    width: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border: 5px solid var(--primary);
+    background-color: var(--secondary-dark);
+}
